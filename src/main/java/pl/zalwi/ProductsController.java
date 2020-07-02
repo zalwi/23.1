@@ -35,7 +35,10 @@ public class ProductsController {
             model.addAttribute("totalPrice", itemRepository.totalPriceOfItemsInCategory(category));
             return "list";
         } else  {
-            return "redirect:/";
+            model.addAttribute("fullCategoryDescription", "Wszystkie produkty");
+            model.addAttribute("items", itemRepository.getItemList());
+            model.addAttribute("totalPrice", itemRepository.totalPriceOfAllItems());
+            return "list";
         }
     }
 

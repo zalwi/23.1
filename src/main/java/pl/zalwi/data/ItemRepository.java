@@ -35,10 +35,20 @@ public class ItemRepository {
                         .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
+    public BigDecimal totalPriceOfAllItems(){
+        return itemList.stream()
+                .map(Item::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
     public List<Item> getListOfItemInCategory(String shortCategoryDescription){
         return itemList.stream()
                 .filter(item -> item.getCategory().getShortDescription().equals(shortCategoryDescription))
                         .collect(Collectors.toList());
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
     }
 
     public void addItem(Item item){
