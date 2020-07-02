@@ -1,5 +1,6 @@
 package pl.zalwi;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,9 @@ import java.math.BigDecimal;
 @Controller
 public class ProductsController {
 
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
 
+    @Autowired
     public ProductsController(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
@@ -25,7 +27,7 @@ public class ProductsController {
     }
 
     @GetMapping("/list")
-    public String details(@RequestParam String category, Model model) {
+    public String details(@RequestParam(required = false) String category, Model model) {
 
         if(category != null) {
             model.addAttribute("fullCategoryDescription", ItemCategory.getFullDescription(category));
@@ -44,8 +46,18 @@ public class ProductsController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam String name,  @RequestParam String category, @RequestParam BigDecimal price) {
+    public String add(@RequestParam(required = false) String name,
+                      @RequestParam(required = false) String category,
+                      @RequestParam(required = false) BigDecimal price) {
+        if(name.isEmpty()||category.isEmpty()||price == null){
+            return "redirect:/err";
+        }
         itemRepository.addItem(new Item(name, ItemCategory.getItemCategoryByShortDescription(category), price));
         return "redirect:/list?category="+category;
+    }
+
+    @GetMapping("/err")
+    public String error(){
+        return "err";
     }
 }

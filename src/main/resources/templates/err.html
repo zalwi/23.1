@@ -11,20 +11,7 @@
     <div class="header">
         <h1>Spring MVC - Produkty</h1>
     </div>
-    <div class="content">
-        <h2>Lista kategorii produktów:</h2>
-        <a th:href="@{'/list?category=' + ${category.shortDescription}}" class="category-item"
-           th:each="category: ${categories}">
-            <div class="category-info ml-2">
-                <p th:text="${category.fullDescription}">opis</p>
-            </div>
-        </a>
-        <a href="/addForm" class="category-item">
-            <div class="category-info ml-2">
-                <p>Dodaj przedmiot</p>
-            </div>
-        </a>
-    </div>
+    Błąd danych wejsciowych <a href="/">powrót</a>
 </div>
 </body>
 </html>

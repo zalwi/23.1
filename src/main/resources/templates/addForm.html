@@ -8,31 +8,31 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
 </head>
-<!DOCTYPE html>
 <body>
 <div style="padding-left: 5%; padding-right: 5%; padding-top: 2%">
+    <div class="header">
+        <h1>Spring MVC - Produkty</h1>
+    </div>
     <form action="/add" method="post">
         <div>
-            <h1>Dodaj produkt</h1>
+            <h2>Dodaj produkt</h2>
         </div>
         <div class="form-group">
             <label for="inputName">Nazwa</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Wpisz nazwę towaru" name="name">
+            <input type="text" class="form-control" id="inputName" placeholder="Wpisz nazwę towaru" name="name" required>
         </div>
         <div class="form-group">
             <label for="inputPrice">Cena</label>
-            <input type="number" class="form-control" step=".01" id="inputPrice" placeholder="Podaj cenę towaru" name="price">
+            <input type="number" class="form-control" step=".01" id="inputPrice" placeholder="Podaj cenę towaru" name="price" required>
         </div>
-
             <div class="form-group">
                 <label for="category">Kategoria</label>
-                <select id="category" class="form-control" name="category">
-                    <option selected disabled>Wybierz kategorię produktu..</option>
+                <select id="category" class="form-control" name="category" required>
+                    <option value="" selected disabled>Wybierz kategorię produktu..</option>
                     <option th:each="category: ${categories}" th:value="${category.getShortDescription()}" th:text="${category.getFullDescription()}">
                     </option>
                 </select>
             </div>
-
         <button type="submit" class="btn btn-primary">Dodaj</button>
     </form>
     <a href="/">powrót do strony głównej</a>
